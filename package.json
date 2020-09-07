@@ -1,0 +1,28 @@
+{
+  "name": "rust-wasm-hotreload",
+  "version": "1.0.0",
+  "description": "WASM Hot-Reloading",
+  "main": "index.js",
+  "scripts": {
+    "watch": "nodemon --ext ts -w assembly -x npm run asbuild:optimized",
+    "asbuild:untouched": "asc assembly/index.ts --target debug",
+    "asbuild:optimized": "asc assembly/index.ts --target release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shekohex/rust-wasm-hotreload.git"
+  },
+  "keywords": [
+    "wasm"
+  ],
+  "author": "Shady Khalifa <shekohex@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shekohex/rust-wasm-hotreload/issues"
+  },
+  "homepage": "https://github.com/shekohex/rust-wasm-hotreload#readme",
+  "devDependencies": {
+    "assemblyscript": "^0.14.10",
+    "nodemon": "^2.0.4"
+  }
+}
