@@ -1,8 +1,9 @@
-use std::sync::{mpsc::channel, Arc, RwLock};
+use std::sync::{mpsc::channel, Arc};
 use std::thread;
 use std::time::Duration;
 
 use anyhow::{anyhow, Result};
+use atomic_refcell::AtomicRefCell;
 use notify::{watcher, DebouncedEvent, RecursiveMode, Watcher};
 use wasmtime::*;
 
@@ -15,7 +16,7 @@ const WASM_FILE_PATH: &str = "./build/optimized.wasm";
 /// It is very cheap to clone the container and be shared between the threads.
 #[derive(Clone)]
 struct WasmModuleContainer {
-    module: Arc<RwLock<Module>>,
+    module: Arc<AtomicRefCell<Module>>,
     engine: Engine,
 }
 
@@ -27,13 +28,13 @@ impl WasmModuleContainer {
         let module = Module::from_file(&engine, WASM_FILE_PATH)?;
         Ok(Self {
             engine,
-            module: Arc::new(RwLock::new(module)),
+            module: Arc::new(AtomicRefCell::new(module)),
         })
     }
 
     /// Create an [`Instance`] from the already compiled WASM [`Module`].
     pub fn instance(&self) -> Result<Instance> {
-        let module = self.module.read().unwrap();
+        let module = self.module.borrow();
         let store = Store::new(&self.engine);
         Instance::new(&store, &module, &[])
     }
@@ -43,8 +44,7 @@ impl WasmModuleContainer {
     pub fn reload(&self) -> Result<()> {
         println!("Code Changed, Recompile..");
         let module = Module::from_file(&self.engine, WASM_FILE_PATH)?;
-        let mut current_module = self.module.write().unwrap();
-        *current_module = module;
+        *self.module.borrow_mut() = module;
         println!("Hot Reloaded");
         Ok(())
     }

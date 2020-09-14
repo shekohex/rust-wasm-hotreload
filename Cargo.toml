@@ -8,3 +8,4 @@ edition = "2018"
 anyhow = "1.0"
 wasmtime = { version = "0.19", default-features = false }
 notify = "4.0"
+atomic_refcell = "0.1"
