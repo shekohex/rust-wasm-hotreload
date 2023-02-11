@@ -23,6 +23,6 @@
   "homepage": "https://github.com/shekohex/rust-wasm-hotreload#readme",
   "devDependencies": {
     "assemblyscript": "^0.14.10",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.20"
   }
 }
