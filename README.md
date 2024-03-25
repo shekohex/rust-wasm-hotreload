@@ -6,17 +6,17 @@ for a simple demo see this [tweet](https://twitter.com/ShekoHex/status/130297399
 
 ## Try it
 
-First make sure you have Rust installed and nodejs (also NPM).
+First make sure you have both Rust and NodeJS (also NPM) installed.
 
 1. Clone
 
-```bash
+```sh
 $ git clone https://github.com/shekohex/rust-wasm-hotreload
 ```
 
 2. Build
 
-```bash
+```sh
 $ npm install
 $ npm run asbuild:optimized
 $ cargo build
@@ -24,34 +24,34 @@ $ cargo build
 
 3. Run
 
-in one terminal start build an watch for changes to our AssemplyScript File.
+In one terminal, start build and watch for changes to our AssemplyScript File.
 
-```bash
+```sh
 $ npm run watch
 ```
 
 in another terminal simply run
 
-```bash
+```sh
 $ cargo run
 ```
 
-Now, just change the logic in the `assembly/index.ts` file and watch the magic happens :).
+Now, just change the logic in the `assembly/index.ts` file and watch the magic happen :).
 
 ### Use Cases
 
 This Project uses [Rust](https://www.rust-lang.org/) and [AssemblyScript](http://assemblyscript.org/) to address these use cases:
 
 - Scripting (by extending your program with other functionality by using WASM files).
-- GameDev (again, it would be useful to add some game logic like (NPCs, Quests, ..etc) as WASM module for easy changes and fast development)
+- GameDev (again, it would be useful to add some game logic like (NPCs, Quests, ...etc) as WASM module for easy changes and fast development)
 - User-Land Extentions.
 - Your Case?
 
 ### FAQ
 
-1. Why using [AssemplyScript](https://www.assemblyscript.org/) and Not Rust for WASM?
+1. Why use [AssemplyScript](https://www.assemblyscript.org/) rather than Rust for WASM?
 
-Well, let's be honest here .. Rust Compile-Time will kill the whole idea about Fast Hot Reloading, and while AssemblyScript Compiles so fast .. it emits smaller code than Rust would and yet almost the same performance and that makes it a better option for writing code that compiles to WASM.
+Well, let's be honest here... `rustc` compilation-time would kill the whole idea about _Fast Hot Reloading™_, and while AssemblyScript compiles so fast, it emits smaller code than `rustc` would and yet it has almost the same performance, and that's why it's a better option for writing code that compiles to WASM.
 
 ### Contributing
 
